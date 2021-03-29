@@ -1,0 +1,175 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title style="color:white;
+      font-family: Roboto;
+      font-weight: 700;
+      line-height: 58px;">
+      {{this?.Details?.siteName}}
+    </ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button fill="solid" style="font-size: 18px;"
+        (click)="GoToMaps(this?.Details?.latitude,this?.Details?.longitude)" color="secondary">
+        <ion-icon slot="start" name="location"></ion-icon>
+      </ion-button>
+      <ion-button fill="solid" style="font-size: 18px;" [routerLink]="'/home'" routerDirection="forward"
+        color="secondary">
+        <ion-icon slot="start" name="home"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-label>VUE GLOBALE</ion-label>
+      <ion-icon name="eye" class="OverviewEye" [routerLink]="'/bill/'+ this?.Details?.id" routerDirection="forward">
+      </ion-icon>
+    </ion-card-header>
+    <ion-card-content style="text-align: center;">
+      <ion-icon name="cash"></ion-icon>
+      <label class="titles">Facture</label><br>
+      <label class="data">123.500</label>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-label>ALARMES</ion-label>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="row">
+        <div class="col-4"><label
+            style="background-color: #c0392b;">{{this?.data?.critique[0].count_alert_notification}}</label></div>
+        <div class="col-4"><label
+            style="background-color: #e67e22;">{{this?.data?.majeure[0].count_alert_notification}}</label></div>
+        <div class="col-4"><label
+            style="background-color: #f1c40f;">{{this?.data?.mineure[0].count_alert_notification}}</label></div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-label>SURVEILLANCE</ion-label>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="row">
+        <div class="col-6">
+          <ng-container *ngFor="let device of this?.Details?.boxes['0']?.devices">
+            <ng-container *ngIf="device.model">
+              <ng-container *ngIf="device.model.code=='ACMAIN71'">
+                <ng-container *ngIf="device.mesures[0]">
+                  <ion-icon name="flash" style="margin: 0px 4px -3px -19px;"></ion-icon>
+                  <label class="titles" style="margin-bottom: 32px;">Energie</label><br>
+                  <label class="dataAC">P1 : {{device.mesures[0].valeur1}} KWH</label><br>
+                  <label class="dataAC">P2 : {{device.mesures[0].valeur2}} KWH</label><br>
+                  <label class="dataAC">P3 : {{device.mesures[0].valeur3}} KWH</label>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+        <div class="col-6">
+          <ng-container *ngFor="let device of this?.Details?.boxes['0']?.devices">
+            <ng-container *ngIf="device.model">
+              <ng-container *ngIf="device.model.code=='ACMAIN70'">
+                <ng-container *ngIf="device.mesures[0]">
+                  <ion-icon name="git-compare"></ion-icon>
+                  <label class="titles" style="margin-bottom: 32px;">Puissance</label><br>
+                  <label class="dataAC">P1 : {{device.mesures[0].valeur1}} KW</label><br>
+                  <label class="dataAC">P2 : {{device.mesures[0].valeur2}} KW</label><br>
+                  <label class="dataAC">P3 : {{device.mesures[0].valeur3}} KW</label>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <ng-container *ngFor="let device of this?.Details?.boxes['0']?.devices">
+            <ng-container *ngIf="device.model">
+              <ng-container *ngIf="device.model.code=='ACMAIN68'">
+                <ng-container *ngIf="device.mesures[0]">
+                  <ion-icon name="speedometer" style="margin: 0px 4px -3px -13px;"></ion-icon>
+                  <label class="titles" style="margin-bottom: 32px;">Tension</label><br>
+                  <label class="dataAC">P1 : {{device.mesures[0].valeur1}} V</label><br>
+                  <label class="dataAC">P2 : {{device.mesures[0].valeur2}} V</label><br>
+                  <label class="dataAC">P3 : {{device.mesures[0].valeur3}} V</label>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+        <div class="col-6">
+          <ng-container *ngFor="let device of this?.Details?.boxes['0']?.devices">
+            <ng-container *ngIf="device.model">
+              <ng-container *ngIf="device.model.code=='ACMAIN69'">
+                <ng-container *ngIf="device.mesures[0]">
+                  <ion-icon name="color-wand" style="margin: 0px 4px -3px -19px;"></ion-icon>
+                  <label class="titles" style="margin-bottom: 32px;">Courant</label><br>
+                  <label class="dataAC">P1 : {{device.mesures[0].valeur1}} A</label><br>
+                  <label class="dataAC">P2 : {{device.mesures[0].valeur2}} A</label><br>
+                  <label class="dataAC">P3 : {{device.mesures[0].valeur3}} A</label>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12" style="text-align: center;">
+          <ng-container *ngFor="let device of this?.Details?.boxes['0']?.devices">
+            <ng-container *ngIf="device.model">
+              <ng-container *ngIf="device.model.code=='ACMAIN71'">
+                <ng-container *ngIf="device.mesures[0].createdAt ">
+                  <ion-icon name="calendar" style="color: #4949f9;"></ion-icon>
+                  <label class="dataAC" style="margin-left: 0px;
+                margin-top: 10px;
+                position: relative;
+                color: #4949f9;">
+                    {{device.mesures[0].createdAt | date: 'dd-MM-yyyy HH:mm'}}
+                  </label>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-label>ENVIRONNEMENT</ion-label>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="row">
+        <div class="col-6">
+          <ng-container *ngFor="let device of this?.Details?.boxes['0']?.devices">
+            <ng-container *ngIf="device.model">
+              <ng-container *ngIf="device.model.code=='ENV93'">
+                <ng-container *ngIf="device.mesures[0]">
+                  <ion-icon name="battery-charging"></ion-icon>
+                  <label class="titles">Temperature batteries</label><br>
+                  <label class="data">{{device.mesures[0].valeur1}}° C</label>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+        <div class="col-6">
+          <ng-container *ngFor="let device of this?.Details?.boxes['0']?.devices">.
+            <ng-container *ngIf="device.model">
+              <ng-container *ngIf="device.model.code=='ENV67'">
+                <ng-container *ngIf="device.mesures[0]">
+                  <ion-icon name="thermometer"></ion-icon>
+                  <label class="titles">Temperature ambiante</label><br>
+                  <label class="data">{{device.mesures[0].valeur1}}° C</label>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

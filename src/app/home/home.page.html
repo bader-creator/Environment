@@ -1,0 +1,160 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title style="color:white;
+      font-family: Roboto;
+      font-weight: 700;
+      line-height: 58px;
+      text-align: center;
+      margin-left: 55px;">
+      Accueil
+    </ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button fill="solid" style="font-size: 18px;" (click)="logout()" color="secondary">
+        <ion-icon slot="start" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="banner" style="height:56px;">
+    <div class="profile">
+      <div class="content-profile">
+        <img src="{{env}}{{User?.path || 'empty.png'}}"
+          class="profile-img shadow-lg img-fluid z-depth-1 rounded-circle">
+      </div>
+    </div>
+    <div class="info">
+      <ion-label>{{this?.User?.lastName}} {{this?.User?.firstName}}</ion-label><br>
+      <ion-badge color="primary">{{this?.User?.groupe}}</ion-badge>
+    </div>
+
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6">
+        <ion-card (click)="GoesTListeSite()" class="left">
+          <ion-card-header>
+            <ion-card-subtitle>
+              <ion-icon name="radio"></ion-icon>
+            </ion-card-subtitle>
+            <ion-card-title>Site</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <div class="col-6">
+        <ion-card class="right" (click)="presentConfirm()">
+          <ion-card-header>
+            <ion-card-subtitle>
+              <ion-icon name="desktop"></ion-icon>
+            </ion-card-subtitle>
+            <ion-card-title>Consommation</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <ion-card class="left" (click)="presentConfirm()">
+          <ion-card-header>
+            <ion-card-subtitle>
+              <ion-icon name="checkmark-done-circle"></ion-icon>
+            </ion-card-subtitle>
+            <ion-card-title>Qualité</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+
+          </ion-card-content>
+        </ion-card>
+
+      </div>
+      <div class="col-6">
+        <ion-card class="right" (click)="presentConfirm()">
+          <ion-card-header>
+            <ion-card-subtitle>
+              <ion-icon name="notifications"></ion-icon>
+            </ion-card-subtitle>
+            <ion-card-title>Alarme</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <ion-card class="left" (click)="presentConfirm()">
+          <ion-card-header>
+            <ion-card-subtitle>
+              <ion-icon name="earth"></ion-icon>
+            </ion-card-subtitle>
+            <ion-card-title>Environnement</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+
+          </ion-card-content>
+        </ion-card>
+
+      </div>
+      <div class="col-6">
+        <ion-card class="right" (click)="presentConfirm()">
+          <ion-card-header>
+            <ion-card-subtitle>
+              <ion-icon name="receipt"></ion-icon>
+            </ion-card-subtitle>
+            <ion-card-title>Actionneur</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+
+          </ion-card-content>
+        </ion-card>
+
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer no-padding no-marging>
+
+  <ion-segment no-padding no-marging [(ngModel)]="segment">
+    <ion-segment-button value="site" checked (click)="GoesTListeSite()">
+      <ion-icon size="small" name="radio" style="margin-top: 0px;color: white;"></ion-icon>
+    </ion-segment-button>
+
+    <ion-segment-button value="monitor" (click)="presentConfirm()">
+      <ion-icon size="small" name="desktop" style="margin-top: 0px;color: white;"></ion-icon>
+    </ion-segment-button>
+
+    <ion-segment-button value="quality" (click)="presentConfirm()">
+      <ion-icon size="small" name="checkmark-done-circle" style="margin-top: 0px;color: white;"></ion-icon>
+    </ion-segment-button>
+
+    <ion-segment-button value="alarme" (click)="presentConfirm()">
+      <ion-icon size="small" name="notifications" style="margin-top: 0px;color: white;"></ion-icon>
+    </ion-segment-button>
+
+
+    <ion-segment-button value="environment" (click)="presentConfirm()">
+      <ion-icon size="small" name="earth" style="margin-top: 0px;color: white;"></ion-icon>
+    </ion-segment-button>
+
+    <ion-segment-button value="actionneur" (click)="presentConfirm()">
+      <ion-icon size="small" name="receipt" style="margin-top: 0px;color: white;"></ion-icon>
+    </ion-segment-button>
+
+  </ion-segment>
+
+</ion-footer>
