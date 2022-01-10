@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title style="color:white;font-family: Roboto;
+      font-weight: 700;
+      line-height: 58px;
+      text-align: center;margin-right: -65px;">
+      Liste des Sites
+    </ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button fill="solid" style="font-size: 18px;" [routerLink]="'/home'" routerDirection="forward"
+        color="secondary">
+        <ion-icon slot="start" name="home"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="medium">
+    <ion-searchbar (ionBlur)="closesitem($event)" (ionChange)="closesitem($event)" (ionFocus)="closesitem($event)">
+    </ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button size="small" shape="round" color="light">
+        <ion-icon name="list"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="" refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+
+    <ng-container *ngFor="let site of Sites">
+      <ion-card (click)="NavigateToPage(site.id)">
+        <ion-icon name="radio" style="margin-right: 10px;margin-bottom: -2px;"></ion-icon>
+        <ion-label style="font-size: 18px;">{{site.siteName}}</ion-label>
+        <ion-icon name="chevron-forward" style="float: right;margin-top: 5px;"></ion-icon>
+
+
+        <ion-badge *ngIf="site.count_alert_notification!=null" color="danger">{{site.count_alert_notification}}
+        </ion-badge>
+        <ion-badge *ngIf="site.count_alert_notification==null" color="danger">0</ion-badge>
+
+
+      </ion-card>
+    </ng-container>
+
+  </ion-list>
+</ion-content>

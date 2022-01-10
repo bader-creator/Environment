@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ng-container *ngIf="this?.list">
+      <ion-title style="color:white;font-family: Roboto;
+      font-weight: 700;
+      line-height: 58px;
+      text-align: center;margin-right: -65px;">
+        {{this?.list['0']?.box?.site?.siteName}}
+      </ion-title>
+    </ng-container>
+    <ion-buttons slot="secondary">
+      <ion-button fill="solid" style="font-size: 18px;" [routerLink]="'/home'" routerDirection="forward"
+        color="secondary">
+        <ion-icon slot="start" name="home"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="" refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ng-container *ngFor="let l of list;let k=index;">
+    <ion-card>
+      <ion-card-header>
+        <ion-label>{{l.name}}</ion-label>
+      </ion-card-header>
+      <ion-card-content>
+
+        <ion-toggle color="primary" [(ngModel)]="l.status" (ionChange)="devicesAction(l.id,k,$event)"></ion-toggle>
+
+      </ion-card-content>
+    </ion-card>
+
+  </ng-container>
+</ion-content>
+
+<ion-footer no-padding no-marging>
+
+  <ion-segment no-padding no-marging [(ngModel)]="segment">
+    <ion-segment-button value="bill" checked [routerLink]="'/bill/'+ this?.idSite" routerDirection="forward">
+      <ion-icon size="small" name="cash" style="margin-top: 0px;color: white;">
+      </ion-icon>
+    </ion-segment-button>
+
+    <ion-segment-button value="monitor" [routerLink]="'/monitor/'+ this?.idSite" routerDirection="forward">
+      <ion-icon size="small" name="desktop" style="margin-top: 0px;color: white;"></ion-icon>
+    </ion-segment-button>
+
+    <ion-segment-button value="quality" [routerLink]="'/quality/'+ this?.idSite" routerDirection="forward">
+      <ion-icon size="small" name="checkmark-done-circle" style="margin-top: 0px;color: white;"></ion-icon>
+    </ion-segment-button>
+
+    <ion-segment-button value="alarme" [routerLink]="'/alarme/'+ this?.idSite" routerDirection="forward">
+      <ion-icon size="small" name="notifications" style="margin-top: 0px;color: white;"></ion-icon>
+    </ion-segment-button>
+
+
+    <ion-segment-button value="environment" [routerLink]="'/environment/'+ this?.idSite" routerDirection="forward">
+      <ion-icon size="small" name="earth" style="margin-top: 0px;color: white;"></ion-icon>
+    </ion-segment-button>
+
+    <ion-segment-button value="actionneur" [routerLink]="'/actionneur/'+ this?.idSite" routerDirection="forward">
+      <ion-icon size="small" name="receipt" style="margin-top: 0px;color: white;"></ion-icon>
+    </ion-segment-button>
+
+  </ion-segment>
+
+</ion-footer>
